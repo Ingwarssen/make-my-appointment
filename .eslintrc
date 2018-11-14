@@ -1,0 +1,43 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "max-len": ["warn", 150, {
+      "ignoreComments": true,
+      "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\(/"
+    }],
+    "linebreak-style": "off",
+    "consistent-return": "off",
+    "prefer-const": ["warn", {"destructuring": "all"}],
+    "arrow-parens": ["warn", "as-needed"],
+    "no-restricted-syntax": ["warn", "WithStatement"],
+    "no-unused-expressions": ["warn", { "allowShortCircuit": true, "allowTernary": true }],
+    "indent": [ "error", 2 , { "SwitchCase": 1 }],
+    "key-spacing": [ "error", { "align": "colon"} ],
+    "generator-star-spacing": ["warn", {"before": false, "after": true}],
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    "no-unused-vars": ["error", { "args": "none" }],
+    "prefer-arrow-callback": ["warn", { "allowNamedFunctions": true }],
+    "arrow-body-style": ["warn", "as-needed"],
+    "no-underscore-dangle": [
+      "error", {
+        "allow": [
+          "_id",
+          "options_",
+          "params_"
+        ]
+      }
+    ],
+    "no-param-reassign": ["error", { "props": false }],
+    "comma-dangle": [ "error", {
+      "arrays": "never",
+      "objects": "never",
+      "imports": "never",
+      "exports": "never",
+      "functions": "ignore"
+    }]
+  }
+}
