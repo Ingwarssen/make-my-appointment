@@ -1,9 +1,7 @@
-const util = require('util');
-const winston = require('winston');
+const util = require('util')
+const winston = require('winston')
 
-winston.cli();
-
-const logger = new (winston.Logger)({
+const logger = winston.createLogger({
   transports: [
     new (winston.transports.Console)({
       prettyPrint                    : true,
@@ -15,12 +13,12 @@ const logger = new (winston.Logger)({
       humanReadableUnhandledException: true
     })
   ]
-});
+})
 
 logger.inspect = (...args) => {
-  const inspected = util.inspect(args, { showHidden: false, depth: null });
+  const inspected = util.inspect(args, {showHidden: false, depth: null})
 
-  console.log(inspected);
-};
+  console.log(inspected)
+}
 
-module.exports = logger;
+module.exports = logger

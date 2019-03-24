@@ -1,9 +1,7 @@
 const { USER_STATUS } = require('../../../constants');
 const { LOC_STR } = require('../../../constants/responses');
-const activityLog = require('../../../services/activityLog');
 const UserModel = require('../../user/model');
 const AccessRoleModel = require('../../accessRole/model');
-const addDevice = require('../../../services/queue/helpers/createAddDeviceTask');
 const schema = require('../joi.schema').logInFromMobile;
 // const addDevice = require('../../../services/queue/helpers/createAddDeviceTask');
 
@@ -81,11 +79,6 @@ module.exports = async (req, res, next) => {
   }
 
   logger.info(`User logged in from MOBILE-- uid: ${user._id} deviceId: ${payload.deviceId}`);
-
-  // track activity
-  if (user.status !== USER_STATUS.INVITED) {
-    activityLog.emit('user:logged-in', userId);
-  }
 
   responseSender.success(res, { data });
 };

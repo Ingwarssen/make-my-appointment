@@ -1,0 +1,62 @@
+{
+  "general.badRequest": {
+    "message": "Bad Request",
+    "description": ""
+  },
+  "general.notAuthorized": {
+    "message": "Not Authorized",
+    "description": ""
+  },
+  "general.internalError": {
+    "message": "Internal Server Error",
+    "description": ""
+  },
+  "general.forbidden": {
+    "message": "Forbidden",
+    "description": ""
+  },
+  "general.validationError": {
+    "message": "Validation Error",
+    "description": ""
+  },
+  "user.emailInUse": {
+    "message": "Email is already used",
+    "description": "Error happen when trying to use unique email that exists in database"
+  },
+  "user.notFound": {
+    "message": "User was not found",
+    "description": ""
+  },
+  "user.passwordIncorrect": {
+    "message": "Old password is not correct",
+    "description": ""
+  },
+  "user.passwordsNotMatch": {
+    "message": "New password and confirm new password doesn't match",
+    "description": ""
+  },
+  "user.tokenExpired": {
+    "message": "Token already expired",
+    "description": ""
+  },
+  "user.disabled": {
+    "message": "User has status disabled",
+    "description": ""
+  },
+  "user.roleNotFound": {
+    "message": "User Access Role was not found",
+    "description": ""
+  },
+  "auth.incorrectLogin": {
+    "message": "Incorrect login",
+    "description": ""
+  },
+  "auth.accountDisabled": {
+    "message": "Your account has been disabled, please contact administrator",
+    "description": ""
+  },
+  "auth.mobileNotAllowed": {
+    "message": "You can not login from mobile",
+    "description": ""
+  }
+}

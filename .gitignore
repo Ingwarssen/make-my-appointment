@@ -64,3 +64,10 @@ make-my-appointment-credentials.*
 
 #API documentation
 dist/apidoc
+
+# Binary
+bin/
+
+# Idea
+.idea
+.idea/

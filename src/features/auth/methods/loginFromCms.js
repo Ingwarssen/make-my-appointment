@@ -1,6 +1,5 @@
 const { USER_STATUS } = require('../../../constants');
 const { LOC_STR } = require('../../../constants/responses');
-const activityLog = require('../../../services/activityLog');
 const UserModel = require('../../user/model');
 const schema = require('../joi.schema').logInFromCms;
 
@@ -49,11 +48,6 @@ module.exports = async (req, res, next) => {
   }
 
   logger.info(`User logged in from CMS -- uid: ${userId}`);
-
-  // track activity
-  if (user.status !== USER_STATUS.INVITED) {
-    activityLog.emit('user:logged-in', userId);
-  }
 
   responseSender.success(res, { data });
 };

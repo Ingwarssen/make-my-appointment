@@ -1,8 +1,8 @@
-const logger = require('./logger');
+const logger = require('./logger')
 const {
   ERROR_NAMES,
   LOC_STR
-} = require('../constants/responses');
+} = require('../constants/responses')
 
 // eslint-disable-next-line
 module.exports = (err, req, res, next) => {
@@ -17,22 +17,22 @@ module.exports = (err, req, res, next) => {
       ex = '',
       details: errDetails = ''
     } = {}
-  } = err;
+  } = err
   const {
     id     : requestId,
     session: {
       uId: userId
-    } = { uId: null }
-  } = req;
+    } = {uId: null}
+  } = req
 
-  const logObject = { status, userId, requestId, name, message };
+  const logObject = {status, userId, requestId, name, message}
 
   // for keeping log clean
   if (![401, 403].includes(status) && name !== 'VALIDATION_ERROR') {
-    logObject.stackTrace = stackTrace.split('\n');
+    logObject.stackTrace = stackTrace.split('\n')
   }
 
-  logger.error(logObject, errDetails, ex);
+  logger.error(logObject, errDetails, ex)
 
-  res.status(status).send({ status, requestId, name, message, localizationKey, details });
-};
+  res.status(status).send({status, requestId, name, message, localizationKey, details})
+}
