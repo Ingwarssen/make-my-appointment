@@ -5,6 +5,23 @@ module.exports = [
 
     cms: {
       create: false,
+      read  : false,
+      update: false,
+      delete: false
+    },
+
+    mobile: {
+      create: false,
+      read  : false,
+      update: false,
+      delete: false
+    }
+  }, {
+    moduleName: 'Users',
+    module    : 2,
+
+    cms: {
+      create: false,
       read  : true,
       update: false,
       delete: false
@@ -17,38 +34,21 @@ module.exports = [
       delete: false
     }
   }, {
-    moduleName: 'Users',
-    module    : 2,
-
-    cms: {
-      create: true,
-      read  : true,
-      update: true,
-      delete: true
-    },
-
-    mobile: {
-      create: true,
-      read  : true,
-      update: true,
-      delete: true
-    }
-  }, {
     moduleName: 'Training schedule',
     module    : 3,
 
     cms: {
-      create: true,
+      create: false,
       read  : true,
-      update: true,
-      delete: true
+      update: false,
+      delete: false
     },
 
     mobile: {
-      create: true,
+      create: false,
       read  : true,
-      update: true,
-      delete: true
+      update: false,
+      delete: false
     }
   }
 ]

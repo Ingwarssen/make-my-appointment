@@ -4,34 +4,34 @@ module.exports = [
     module    : 1,
 
     cms: {
-      create: true,
+      create: false,
       read  : true,
-      update: true,
-      delete: true
+      update: false,
+      delete: false
     },
 
     mobile: {
-      create: true,
+      create: false,
       read  : true,
-      update: true,
-      delete: true
+      update: false,
+      delete: false
     }
   }, {
     moduleName: 'Users',
     module    : 2,
 
     cms: {
-      create: true,
+      create: false,
       read  : true,
-      update: true,
-      delete: true
+      update: false,
+      delete: false
     },
 
     mobile: {
-      create: true,
+      create: false,
       read  : true,
-      update: true,
-      delete: true
+      update: false,
+      delete: false
     }
   }, {
     moduleName: 'Training schedule',
