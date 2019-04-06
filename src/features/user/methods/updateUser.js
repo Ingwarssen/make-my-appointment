@@ -121,7 +121,7 @@ module.exports = async (req, res, next) => {
   }
 
   if (options.email && options.email !== user.email) {
-    options.status = USER_STATUS.INVITED
+    options.status = USER_STATUS.REGISTERED
   }
 
   try {

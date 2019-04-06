@@ -25,6 +25,7 @@ module.exports = {
 
     AUTH: {
       INCORRECT_LOGIN   : 'auth.incorrectLogin',
+      USER_EXISTS   : 'auth.usersExists',
       ACCOUNT_DISABLED  : 'auth.accountDisabled',
       MOBILE_NOT_ALLOWED: 'auth.mobileNotAllowed'
     },

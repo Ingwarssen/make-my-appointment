@@ -12,7 +12,7 @@ router.put('/:userId([0-9a-fA-F]{24})',
   access.middleware(MODULES.USERS.id, 'update'),
   require('../methods/updateUser'));
 
-// active, disabled, invited
+// active, disabled, registered
 router.put('/status/:userId([0-9a-fA-F]{24})',
   access.middleware(MODULES.USERS.id, 'update'),
   require('../methods/toggleUserStatus'));

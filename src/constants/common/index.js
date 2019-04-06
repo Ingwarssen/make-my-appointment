@@ -5,7 +5,7 @@ module.exports = {
   },
 
   USER_STATUS: {
-    INVITED : 'invited',
+    REGISTERED : 'registered',
     ACTIVE  : 'active',
     DISABLED: 'disabled'
   },

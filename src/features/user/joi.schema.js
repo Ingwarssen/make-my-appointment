@@ -29,7 +29,7 @@ const customJoi = Joi.extend({
 })
 
 const status = Joi.string().valid([
-  USER_STATUS.INVITED,
+  USER_STATUS.REGISTERED,
   USER_STATUS.ACTIVE,
   USER_STATUS.DISABLED
 ])
