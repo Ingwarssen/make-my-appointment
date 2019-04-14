@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
-const { USER_STATUS } = require('../../constants');
+const mongoose = require('mongoose')
+const {USER_STATUS} = require('../../constants')
 
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const Schema = new mongoose.Schema({
-  email: {
+  phone: {
     type     : String,
     required : true,
     trim     : true,
@@ -16,9 +16,19 @@ const Schema = new mongoose.Schema({
     required: true
   },
 
-  dateOfJoining: {
+  birthday: {
     type   : Date,
-    default: null
+    default: (new Date()).toUTCString()
+  },
+
+  updatedUtc: {
+    type   : Date,
+    default: (new Date()).toUTCString()
+  },
+
+  cratedUtc: {
+    type   : Date,
+    default: (new Date()).toUTCString()
   },
 
   status: {
@@ -34,6 +44,6 @@ const Schema = new mongoose.Schema({
   versionKey: false,
   autoIndex : false,
   collection: 'users'
-});
+})
 
-module.exports = Schema;
+module.exports = Schema

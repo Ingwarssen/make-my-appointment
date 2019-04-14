@@ -1,4 +1,5 @@
 const Joi = require('joi')
+const JoiPhone = Joi.extend(require('joi-phone-number'))
 const encryptPassword = require('../../utils/encrypt')
 
 const customJoi = Joi.extend({
@@ -22,17 +23,20 @@ const customJoi = Joi.extend({
 })
 
 const logInFromCms = Joi.object().keys({
-  email: Joi.string().email().required(),
+  email   : Joi.string().email().required(),
   password: customJoi.hash().encrypt().required()
 })
 
 const signUpFromMobile = Joi.object().keys({
-  email: Joi.string().email().required(),
-  password: customJoi.hash().encrypt().required()
+  name           : Joi.string().required(),
+  phone          : JoiPhone.string().phoneNumber().required(),
+  password       : customJoi.hash().encrypt().required(),
+  confirmPassword: customJoi.hash().encrypt().required(),
+  birthday       : Joi.date()
 })
 
 const logInFromMobile = logInFromCms.keys({
-  deviceId: Joi.string().required(),
+  deviceId   : Joi.string().required(),
   deviceToken: Joi.string().required()
 })
 

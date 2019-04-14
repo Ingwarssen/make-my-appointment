@@ -1,7 +1,9 @@
-const Joi = require('joi')
+const JoiOrig = require('joi')
+const Joi = JoiOrig.extend(require('joi-phone-number'))
 
 const defUserObj = Joi.object().keys({
-  email   : Joi.string().email().required(),
+  name    : Joi.string().required(),
+  phone   : Joi.string().phoneNumber().required(),
   password: Joi.string().required()
 }).required()
 

@@ -33,6 +33,7 @@ module.exports = {
     USER: {
       TOKEN_EXPIRED: 'user.tokenExpired',
       EMAIL_IN_USE : 'user.emailInUse',
+      PHONE_IN_USE : 'user.phoneInUse',
       NOT_FOUND    : 'user.notFound'
     },
 

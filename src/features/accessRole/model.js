@@ -13,5 +13,11 @@ module.exports = {
 
   updateOne (query, modify, opt) {
     return Model.findOneAndUpdate(query, modify, opt)
-  }
+  },
+
+  getOne(query) {
+    return Model.findOne(query, { _id: 1, name: 1, level: 1 })
+      .lean()
+      .exec();
+  },
 }

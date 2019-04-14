@@ -1,4 +1,5 @@
 const Joi = require('joi')
+const JoiPhone = Joi.extend(require('joi-phone-number'))
 const encryptPassword = require('../../utils/encrypt')
 const {
   STATUS_ACTION,
@@ -42,47 +43,31 @@ const filter = Joi.object().keys({
   endDate    : Joi.date()
 })
 
-const createdBy = Joi.object().keys({
-  user: Joi.string().regex(OBJECT_ID_REGEX),
-  date: Joi.date()
-})
-
 const create = Joi.object().keys({
-  name       : Joi.string().required(),
-  email      : Joi.string().email().required(),
-  accessRole : Joi.number().integer().min(1).required(),
-  password   : customJoi.hash().encrypt().required(),
-  nationality: Joi.string().required(),
-  editedBy   : createdBy,
-  createdBy
+  name           : Joi.string().required(),
+  phone          : JoiPhone.string().phoneNumber().required(),
+  password       : customJoi.hash().encrypt().required(),
+  confirmPassword: customJoi.hash().encrypt().required(),
+  birthday       : Joi.date(),
+  updatedUtc     : Joi.date(),
+  createdUtc     : Joi.date()
 })
 
 const update = Joi.object().keys({
-  name       : Joi.string(),
-  email      : Joi.string().email(),
-  accessRole : Joi.number().integer().min(1),
-  password   : customJoi.hash().encrypt(),
-  nationality: Joi.string(),
-  editedBy   : createdBy,
-  createdBy,
-})
-
-const activateAccount = Joi.object().keys({
-  newPassword       : customJoi.hash().encrypt().required(),
-  confirmNewPassword: customJoi.hash().encrypt().required()
+  name           : Joi.string(),
+  phone          : JoiPhone.string().phoneNumber(),
+  password       : customJoi.hash().encrypt(),
+  confirmPassword: customJoi.hash().encrypt(),
+  birthday       : Joi.date()
 })
 
 const getAll = Joi.object().keys({
-  page      : Joi.number().integer().min(1).default(1),
-  count     : Joi.number().integer().min(1).default(20),
-  sortBy    : Joi.string().allow('').default('createdBy.date'),
-  sortOrder : Joi.number().valid([-1, 1]).default(-1),
-  search    : Joi.string().allow('').default(null),
+  page     : Joi.number().integer().min(1).default(1),
+  count    : Joi.number().integer().min(1).default(20),
+  sortBy   : Joi.string().allow('').default('createdBy.date'),
+  sortOrder: Joi.number().valid([-1, 1]).default(-1),
+  search   : Joi.string().allow('').default(null),
   filter
-})
-
-const changePassword = activateAccount.keys({
-  oldPassword: customJoi.hash().encrypt().required()
 })
 
 const changeAvatar = Joi.object().keys({
@@ -90,7 +75,7 @@ const changeAvatar = Joi.object().keys({
 })
 
 const forgotPassword = Joi.object().keys({
-  email: Joi.string().email().required()
+  phone: JoiPhone.string().phoneNumber().required()
 })
 
 const toggleStatus = Joi.object().keys({
@@ -104,8 +89,6 @@ module.exports = {
   email,
   create,
   password,
-  changePassword,
-  activateAccount,
   forgotPassword,
   changeAvatar,
   toggleStatus,

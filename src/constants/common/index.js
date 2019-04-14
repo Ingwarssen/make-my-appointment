@@ -23,12 +23,6 @@ module.exports = {
   DEF_USER: {
     name       : 'Super Admin',
     status     : 'active',
-    nationality: 'French'
-  },
-
-  TIME: {
-    DAYS_IN_YEAR : 365,
-    DAYS_IN_MONTH: 31
   },
 
   CONTENT_STATUS: {
@@ -43,5 +37,6 @@ module.exports = {
     UNISEX: 'unisex'
   },
 
-  OBJECT_ID_REGEX: /^[0-9a-fA-F]{24}$/
+  OBJECT_ID_REGEX: /^[0-9a-fA-F]{24}$/,
+  DEFAULT_AVATAR_URL: 'https://www.fancyhands.com/images/default-avatar-250x250.png'
 }

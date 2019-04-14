@@ -5,9 +5,9 @@ const Joi = require('joi')
 const validationSchema = require('./joi.schema')
 
 let config = {
-  env: process.env.NODE_ENV,
-  isTest: process.env.NODE_ENV === 'test',
-  isProduction: process.env.NODE_ENV === 'production',
+  env             : process.env.NODE_ENV,
+  isTest          : process.env.NODE_ENV === 'test',
+  isProduction    : process.env.NODE_ENV === 'production',
   workingDirectory: path.join(__dirname, '../../')
 }
 
@@ -40,8 +40,9 @@ config.mongodbUri = nconf.get('MONGODB_URI')
 
 // admin
 config.defUser = {
-  email: nconf.get('DEF_USER_LOGIN'),
-  password: nconf.get('DEF_USER_PASSWORD')
+  name           : nconf.get('DEF_USER_NAME'),
+  phone          : nconf.get('DEF_USER_LOGIN'),
+  password       : nconf.get('DEF_USER_PASSWORD'),
 }
 
 const {
@@ -49,7 +50,7 @@ const {
   value
 } = Joi.validate(config, validationSchema, {
   abortEarly: false,
-  convert: true
+  convert   : true
 })
 
 if (error) {

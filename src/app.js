@@ -3,6 +3,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const consolidate = require('consolidate')
+
+const expressBearerToken = require('express-bearer-token');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+
 const config = require('./config')
 const startUpScript = require('./init')
 const mainRouter = require('./features')
@@ -47,6 +53,9 @@ module.exports = {
     app.set('view engine', 'hbs')
     app.set('views', `${config.workingDirectory}src/views`)
 
+    app.use(helmet());
+    app.use(cors());
+
     // set static directory
     app.use(express.static(`${config.workingDirectory}dist`))
 
@@ -61,6 +70,9 @@ module.exports = {
 
     app.use(sessionMiddleware.connect())
     app.use(cacheControlMiddleware)
+
+    app.use(cookieParser());
+    app.use(expressBearerToken());
 
     // set logger for request
     app.use(morgan('dev'))
