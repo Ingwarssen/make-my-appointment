@@ -12,7 +12,7 @@ const helmet = require('helmet');
 const config = require('./config')
 const startUpScript = require('./init')
 const mainRouter = require('./features')
-require('mongoose')
+
 const {
   mongo,
   logger,
