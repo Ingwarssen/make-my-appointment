@@ -1,19 +1,27 @@
 const mongoose = require('mongoose')
 const {USER_STATUS} = require('../../constants')
 
-const ObjectId = mongoose.Schema.Types.ObjectId
+// const ObjectId = mongoose.Schema.Types.ObjectId
 
 const Schema = new mongoose.Schema({
   phone: {
     type     : String,
-    required : true,
     trim     : true,
-    lowercase: true
+    lowercase: true,
+    unique   : true
   },
 
-  password: {
-    type    : String,
-    required: true
+  email: {
+    type  : String,
+    unique: true
+  },
+
+  facebookId: {
+    type: String
+  },
+
+  token: {
+    type: String
   },
 
   birthday: {

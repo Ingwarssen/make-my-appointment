@@ -1,25 +1,19 @@
 const pwdGenerator = require('generate-password')
-const {create: schema} = require('../joi.schema')
+const {update: schema} = require('../joi.schema')
 const UserModel = require('../model')
+const checkRoles = require('../utils')
+const {USER_STATUS} = require('../../../constants')
 const {LOC_STR} = require('../../../constants/responses')
-
+const {spaHost} = require('../../../config')
 const {
   responseSender,
-  joiValidate
+  joiValidate,
+  logger
 } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
-  const {
-    body: payload
-  } = req
-  const pwd = pwdGenerator.generate({
-    length   : 8,
-    numbers  : true,
-    uppercase: false,
-    symbols  : false
-  })
-
-  payload.password = pwd
+  const {body: payload} = req
+  const userId = req.params.userId
 
   let options
   try {
@@ -28,20 +22,20 @@ module.exports = async (req, res, next) => {
     return responseSender.validationError(next, ex)
   }
 
-  let createdUser
+  let user
   try {
-    createdUser = await UserModel.create(options)
+    user = await UserModel.updateOne({_id: userId})
   } catch (ex) {
-    if (ex.code === 11000) {
-      return responseSender.badRequest(next, LOC_STR.USER.EMAIL_IN_USE)
-    }
+    return responseSender.error(next, ex, 'Database Error: UserModel.getOne')
+  }
 
-    return responseSender.error(next, ex, 'Database Error: UserModel.create')
+  if (options.email && options.email !== user.email) {
+    options.status = USER_STATUS.REGISTERED
   }
 
   let data
   try {
-    data = await UserModel.getPopulatedById(createdUser._id)
+    data = await UserModel.getPopulatedById(userId)
   } catch (ex) {
     return responseSender.error(next, ex, 'Database Error: UserModel.getPopulatedById')
   }

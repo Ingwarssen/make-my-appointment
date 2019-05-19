@@ -21,7 +21,12 @@ const schema = Joi.object().keys({
   env             : Joi.string().required(),
   isTest          : Joi.boolean().required(),
   isProduction    : Joi.boolean().required(),
-  workingDirectory: Joi.string().required()
+  workingDirectory: Joi.string().required(),
+  facebook        : {
+    appId     : Joi.string().required(),
+    appName   : Joi.string().required(),
+    apiVersion: Joi.string().required()
+  }
 }).unknown().required()
 
 module.exports = schema

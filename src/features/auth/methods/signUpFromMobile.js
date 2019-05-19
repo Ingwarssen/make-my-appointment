@@ -1,9 +1,7 @@
 const {USER_STATUS} = require('../../../constants')
 const {LOC_STR} = require('../../../constants/responses')
 const UserModel = require('../../user/model')
-const AccessRoleModel = require('../../accessRole/model')
 const schema = require('../joi.schema').signUpFromMobile
-// const addDevice = require('../../../services/queue/helpers/createAddDeviceTask');
 
 const {
   responseSender,
@@ -37,7 +35,6 @@ module.exports = async (req, res, next) => {
   try {
     data = await UserModel.getPopulatedById(createdUser._id)
   } catch (ex) {
-    console.log('my error?', ex)
     return responseSender.error(next, ex, 'Database Error: UserModel.getPopulatedById')
   }
 

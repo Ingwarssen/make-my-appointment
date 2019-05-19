@@ -54,11 +54,16 @@ const create = Joi.object().keys({
 })
 
 const update = Joi.object().keys({
-  name           : Joi.string(),
-  phone          : JoiPhone.string().phoneNumber(),
-  password       : customJoi.hash().encrypt(),
-  confirmPassword: customJoi.hash().encrypt(),
-  birthday       : Joi.date()
+  name    : Joi.string(),
+  phone   : JoiPhone.string().phoneNumber(),
+  birthday: Joi.date()
+})
+
+const upsertFb = Joi.object().keys({
+  name      : Joi.string(),
+  facebookId: Joi.string(),
+  phone     : JoiPhone.string().phoneNumber(),
+  birthday  : Joi.date()
 })
 
 const getAll = Joi.object().keys({
@@ -68,6 +73,10 @@ const getAll = Joi.object().keys({
   sortOrder: Joi.number().valid([-1, 1]).default(-1),
   search   : Joi.string().allow('').default(null),
   filter
+})
+
+const getCurrent = Joi.object().keys({
+  id: Joi.string()
 })
 
 const changeAvatar = Joi.object().keys({

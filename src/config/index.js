@@ -40,9 +40,16 @@ config.mongodbUri = nconf.get('MONGODB_URI')
 
 // admin
 config.defUser = {
-  name           : nconf.get('DEF_USER_NAME'),
-  phone          : nconf.get('DEF_USER_LOGIN'),
-  password       : nconf.get('DEF_USER_PASSWORD'),
+  name    : nconf.get('DEF_USER_NAME'),
+  phone   : nconf.get('DEF_USER_LOGIN'),
+  password: nconf.get('DEF_USER_PASSWORD')
+}
+
+// admin
+config.facebook = {
+  appId  : nconf.get('FACEBOOK_APP_ID'),
+  appName: nconf.get('FACEBOOK_APP_NAME'),
+  apiVersion: nconf.get('FACEBOOK_API_VERSION')
 }
 
 const {
