@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
 
   // prepare token for API
   req.auth = {
-    id: req.user.id
+    id: req.user.facebookId
   }
 
   next()

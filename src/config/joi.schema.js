@@ -25,7 +25,8 @@ const schema = Joi.object().keys({
   facebook        : {
     appId     : Joi.string().required(),
     appName   : Joi.string().required(),
-    apiVersion: Joi.string().required()
+    apiVersion: Joi.string().required(),
+    appSecret : Joi.string().required()
   }
 }).unknown().required()
 

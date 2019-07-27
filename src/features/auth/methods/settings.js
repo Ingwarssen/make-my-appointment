@@ -1,9 +1,21 @@
-const {facebook} = require('../../../config')
+const config = require('../../../config')
 
 const {
   responseSender
 } = require('../../../utils')
 
 module.exports = async (req, res) => {
-  responseSender.success(res, {facebook})
+  const {
+    appId,
+    appName,
+    apiVersion
+  } = config.facebook
+
+  responseSender.success(res, {
+    facebook: {
+      appId,
+      appName,
+      apiVersion
+    }
+  })
 }

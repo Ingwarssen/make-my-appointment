@@ -49,7 +49,8 @@ config.defUser = {
 config.facebook = {
   appId  : nconf.get('FACEBOOK_APP_ID'),
   appName: nconf.get('FACEBOOK_APP_NAME'),
-  apiVersion: nconf.get('FACEBOOK_API_VERSION')
+  apiVersion: nconf.get('FACEBOOK_API_VERSION'),
+  appSecret: nconf.get('FACEBOOK_APP_SECRET')
 }
 
 const {

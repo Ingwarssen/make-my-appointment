@@ -11,6 +11,7 @@ const helmet = require('helmet')
 const config = require('./config')
 const startUpScript = require('./init')
 const mainRouter = require('./features')
+const configurePassportFb = require('./features/auth/strategies/configurePassportFb')
 
 const {
   mongo,
@@ -46,6 +47,9 @@ module.exports = {
 
     // connect to database
     await mongo.connect()
+
+    // configure passport
+    configurePassportFb()
 
     // set up views
     app.engine('hbs', consolidate.handlebars)

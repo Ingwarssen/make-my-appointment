@@ -5,5 +5,10 @@ const {
 module.exports = async (req, res) => {
   res.setHeader('x-auth-token', req.token)
 
-  responseSender.success(res, req.auth)
+  const data = {
+    ...req.auth,
+    jwtToken: req.token
+  }
+
+  responseSender.success(res, data)
 }

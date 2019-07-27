@@ -1,16 +1,16 @@
 const express = require('express')
-const passport = require('passport')
 
 const router = express.Router()
 
 router.get('/', require('../methods/isAuth'))
 
 router.post('/facebook',
-  passport.authenticate('facebook-token', {session: false}),
-  require('../methods/facebookAuthCheck'),
+  require('../methods/passportAuth'),
+  require('../methods/authCheck'),
   require('../methods/generateToken'),
   require('../methods/sendToken'))
 
+router.get('/facebook/callback')
 router.get('/me',
   require('../methods/authenticate'),
   require('../../user/methods/getCurrentUser'))
