@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 // eslint-disable-next-line
-router.get('/resetPassword/:token', function (req, res, next) {
+router.get('/resetPassword/:token', function(req, res, next) {
   const {
     params: { token = '' },
   } = req
@@ -13,7 +13,7 @@ router.get('/resetPassword/:token', function (req, res, next) {
 })
 
 // eslint-disable-next-line
-router.get('/resetPasswordSuccess', function (req, res, next) {
+router.get('/resetPasswordSuccess', function(req, res, next) {
   res.render('resetPasswordSuccess')
 })
 

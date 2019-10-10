@@ -28,7 +28,7 @@ const customError = (callback, options, excludeFromStackTrace = customError) => 
   // used only for local logging!!! To improve server log readability
   if (internalErrorInfo) {
     // eslint-disable-next-line
-    err._errInfo = internalErrorInfo;
+    err._errInfo = internalErrorInfo
   }
 
   // used to exclude auxiliary functions from stack trace
@@ -78,32 +78,31 @@ const badRequest = (cb, opt = LOC_STR.GENERAL.BAD_REQUEST) => {
 
 /* eslint-disable */
 const validationError = (cb, error = {}) => {
-  const status = 400;
-  const name = ERROR_NAMES.VALIDATION_ERROR;
-  const locKey = LOC_STR.GENERAL.VALIDATION_ERROR;
-  let {
-    details: [
-      { message = ERROR_NAMES.VALIDATION_ERROR } = {}
-    ] = [],
-    details = []
-  } = error;
+  const status = 400
+  const name = ERROR_NAMES.VALIDATION_ERROR
+  const locKey = LOC_STR.GENERAL.VALIDATION_ERROR
+  let { details: [{ message = ERROR_NAMES.VALIDATION_ERROR } = {}] = [], details = [] } = error
 
-  details = details.map((item) => {
+  details = details.map(item => {
     return {
-      message        : item.message,
-      path           : item.path,
-      localizationKey: LOC_STR.GENERAL.VALIDATION_ERROR
-    };
-  });
+      message: item.message,
+      path: item.path,
+      localizationKey: LOC_STR.GENERAL.VALIDATION_ERROR,
+    }
+  })
 
-  customError(cb, {
-    status,
-    name,
-    locKey,
-    message,
-    details,
-  }, validationError);
-};
+  customError(
+    cb,
+    {
+      status,
+      name,
+      locKey,
+      message,
+      details,
+    },
+    validationError
+  )
+}
 /* eslint-enable */
 
 const notAuthorized = (cb, locKey = LOC_STR.GENERAL.NOT_AUTHORIZED) => {
