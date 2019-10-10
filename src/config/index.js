@@ -1,23 +1,32 @@
 const path = require('path')
 const nconf = require('nconf')
 const Joi = require('joi')
+const dotenv = require('dotenv')
 
 const validationSchema = require('./joi.schema')
 
-let config = {
-  env             : process.env.NODE_ENV,
-  isTest          : process.env.NODE_ENV === 'test',
-  isProduction    : process.env.NODE_ENV === 'production',
-  workingDirectory: path.join(__dirname, '../../')
+if (!process.env.NODE_ENV) {
+  dotenv.config({
+    path: path.join(__dirname, '.env').normalize(),
+  })
+}
+
+const config = {
+  env: process.env.NODE_ENV,
+  isTest: process.env.NODE_ENV === 'test',
+  isProduction: process.env.NODE_ENV === 'production',
+  workingDirectory: path.join(__dirname, '../../'),
 }
 
 // path to file with credentials
-const credentialsPath = path.join(__dirname, `make-my-appointment-credentials${config.env ? `.${config.env}.json` : '.json'}`).normalize()
+const credentialsPath = path
+  .join(__dirname, `make-my-appointment-credentials${config.env ? `.${config.env}.json` : '.json'}`)
+  .normalize()
 const envPath = path.join(__dirname, `.env${config.env ? `.${config.env}` : ''}`).normalize()
 
 // loads environment variables from a .env file into process.env
 require('dotenv').config({
-  path: envPath
+  path: envPath,
 })
 
 // Setup nconf to use (in-order):
@@ -25,9 +34,12 @@ require('dotenv').config({
 //   2. Environment variables
 //   3. A file located at 'config/credentials.json'
 
-nconf.argv().env().file({
-  file: credentialsPath
-})
+nconf
+  .argv()
+  .env()
+  .file({
+    file: credentialsPath,
+  })
 
 // common
 config.host = nconf.get('HOST')
@@ -40,25 +52,22 @@ config.mongodbUri = nconf.get('MONGODB_URI')
 
 // admin
 config.defUser = {
-  name    : nconf.get('DEF_USER_NAME'),
-  phone   : nconf.get('DEF_USER_LOGIN'),
-  password: nconf.get('DEF_USER_PASSWORD')
+  name: nconf.get('DEF_USER_NAME'),
+  phone: nconf.get('DEF_USER_LOGIN'),
+  password: nconf.get('DEF_USER_PASSWORD'),
 }
 
 // admin
 config.facebook = {
-  appId  : nconf.get('FACEBOOK_APP_ID'),
+  appId: nconf.get('FACEBOOK_APP_ID'),
   appName: nconf.get('FACEBOOK_APP_NAME'),
   apiVersion: nconf.get('FACEBOOK_API_VERSION'),
-  appSecret: nconf.get('FACEBOOK_APP_SECRET')
+  appSecret: nconf.get('FACEBOOK_APP_SECRET'),
 }
 
-const {
-  error,
-  value
-} = Joi.validate(config, validationSchema, {
+const { error, value } = Joi.validate(config, validationSchema, {
   abortEarly: false,
-  convert   : true
+  convert: true,
 })
 
 if (error) {

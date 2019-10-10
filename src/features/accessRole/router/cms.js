@@ -1,8 +1,8 @@
-const express = require('express');
-const { access } = require('../../../utils');
+const express = require('express')
+const { access } = require('../../../utils')
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/list', access.checkAuth, require('../methods/getRoles'));
+router.get('/list', access.checkAuth, require('../methods/getRoles'))
 
-module.exports = router;
+module.exports = router

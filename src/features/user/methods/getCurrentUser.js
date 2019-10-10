@@ -1,7 +1,5 @@
 const UserModel = require('../model')
-const {
-  responseSender,
-} = require('../../../utils')
+const { responseSender } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
   const userId = req.auth.id
@@ -13,5 +11,5 @@ module.exports = async (req, res, next) => {
     return responseSender.error(next, ex, 'Database Error: UserModel.getPopulatedById')
   }
 
-  responseSender.success(res, {data})
+  responseSender.success(res, { data })
 }

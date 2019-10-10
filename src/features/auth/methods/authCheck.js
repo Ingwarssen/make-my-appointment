@@ -1,6 +1,4 @@
-const {
-  responseSender
-} = require('../../../utils')
+const { responseSender } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
   if (!req.user) {
@@ -9,7 +7,7 @@ module.exports = async (req, res, next) => {
 
   // prepare token for API
   req.auth = {
-    id: req.user.facebookId
+    id: req.user.facebookId,
   }
 
   next()

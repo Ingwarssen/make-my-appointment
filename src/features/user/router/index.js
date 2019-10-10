@@ -1,5 +1,5 @@
 const mobileRouter = require('./mobile')
 
 module.exports = {
-  mobile: mobileRouter
+  mobile: mobileRouter,
 }

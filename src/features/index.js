@@ -1,10 +1,6 @@
 const express = require('express')
 const addRequestId = require('express-request-id')()
-const {
-  errorHandler,
-  pageNotFoundHandler,
-  setIsMobileMiddleware
-} = require('../utils')
+const { errorHandler, pageNotFoundHandler, setIsMobileMiddleware } = require('../utils')
 
 const viewsRouter = require('./view/router')
 
@@ -12,6 +8,7 @@ const userRouter = require('./user/router')
 const authRouter = require('./auth/router')
 
 const apiRouter = express.Router()
+
 module.exports = app => {
   app.use(addRequestId)
 

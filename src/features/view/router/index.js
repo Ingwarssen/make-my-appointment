@@ -1,22 +1,20 @@
-const { webHost } = require('../../../config');
-const express = require('express');
+const { webHost } = require('../../../config')
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 // eslint-disable-next-line
 router.get('/resetPassword/:token', function (req, res, next) {
   const {
-    params: {
-      token = ''
-    }
-  } = req;
+    params: { token = '' },
+  } = req
 
-  res.render('resetPassword', { webHost, token });
-});
+  res.render('resetPassword', { webHost, token })
+})
 
 // eslint-disable-next-line
 router.get('/resetPasswordSuccess', function (req, res, next) {
-  res.render('resetPasswordSuccess');
-});
+  res.render('resetPasswordSuccess')
+})
 
-module.exports = router;
+module.exports = router

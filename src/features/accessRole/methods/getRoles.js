@@ -1,26 +1,23 @@
-const AccessRoleModel = require('../model');
-const schema = require('../joi.schema').getAll;
-const {
-  responseSender,
-  joiValidate
-} = require('../../../utils');
+const AccessRoleModel = require('../model')
+const schema = require('../joi.schema').getAll
+const { responseSender, joiValidate } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
-  const { query: payload } = req;
+  const { query: payload } = req
 
-  let options;
+  let options
   try {
-    options = await joiValidate(payload, schema);
+    options = await joiValidate(payload, schema)
   } catch (ex) {
-    return responseSender.validationError(next, ex);
+    return responseSender.validationError(next, ex)
   }
 
-  let data;
+  let data
   try {
-    data = await AccessRoleModel.getAll(options);
+    data = await AccessRoleModel.getAll(options)
   } catch (ex) {
-    return responseSender.error(next, ex, 'Database Error: AccessRoleModel.getAll');
+    return responseSender.error(next, ex, 'Database Error: AccessRoleModel.getAll')
   }
 
-  responseSender.success(res, { data });
-};
+  responseSender.success(res, { data })
+}

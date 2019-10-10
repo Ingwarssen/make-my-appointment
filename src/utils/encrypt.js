@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+const crypto = require('crypto')
 
 /**
  * Hashes input to hexadecimal code.
@@ -10,8 +10,8 @@ const crypto = require('crypto');
  */
 
 module.exports = pass => {
-  const shaSum = crypto.createHash('sha256');
+  const shaSum = crypto.createHash('sha256')
 
-  shaSum.update(pass);
-  return shaSum.digest('hex');
-};
+  shaSum.update(pass)
+  return shaSum.digest('hex')
+}

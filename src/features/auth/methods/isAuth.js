@@ -1,30 +1,25 @@
-const { USER_STATUS } = require('../../../constants');
-const User = require('../../user/model');
+const { USER_STATUS } = require('../../../constants')
+const User = require('../../user/model')
 
-const {
-  responseSender
-} = require('../../../utils');
+const { responseSender } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
-  const {
-    loggedIn,
-    uId: userId
-  } = req.session;
+  const { loggedIn, uId: userId } = req.session
 
   if (!loggedIn || !userId) {
-    return responseSender.notAuthorized(next);
+    return responseSender.notAuthorized(next)
   }
 
-  let user;
+  let user
   try {
-    user = await User.getCurrent(userId);
+    user = await User.getCurrent(userId)
   } catch (ex) {
-    return responseSender.error(next, ex, 'Database Error: User.getCurrent');
+    return responseSender.error(next, ex, 'Database Error: User.getCurrent')
   }
 
   if (!user || user.status === USER_STATUS.DISABLED) {
-    return responseSender.notAuthorized(next);
+    return responseSender.notAuthorized(next)
   }
 
-  return responseSender.success(res, { data: user });
-};
+  return responseSender.success(res, { data: user })
+}

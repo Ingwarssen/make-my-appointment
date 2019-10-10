@@ -12,7 +12,7 @@ const logger = require('./logger')
  * @param {number} mid - The module id.
  * @param {string} accessType - The access that should be checked: read, write, etc.
  *
- * @returns {boolean} Response that shows if access is allowed or not.
+ * @return {boolean} Response that shows if access is allowed or not.
  *
  */
 const getAccess = async (req, mid, accessType) => {
@@ -28,8 +28,9 @@ const getAccess = async (req, mid, accessType) => {
   }
 
   const allowed = _.get(data, `access.${agentType}.${accessType}`)
+  const currentUser = _.get(data, 'user')
 
-  req.currentUser = _.get(data, 'user')
+  req = { ...req, currentUser }
 
   return allowed
 }
@@ -44,27 +45,27 @@ const getAccess = async (req, mid, accessType) => {
  * @returns {function} The standard async middleware function with req, res, next params.
  *
  */
-  // eslint-disable-next-line
+// eslint-disable-next-line
 const middleware = (mid, accessType) => {
-    return async (req, res, next) => {
-      // if (!req.session.loggedIn || !req.session.uId) {
-      //   return responseSender.notAuthorized(next);
-      // }
-
-      // let allowed;
-      // try {
-      //   allowed = await getAccess(req, mid, accessType);
-      // } catch (ex) {
-      //   return responseSender.error(next, ex);
-      // }
-      //
-      // if (!allowed) {
-      //   return responseSender.forbidden(next);
-      // }
-
-      next()
+  return async (req, res, next) => {
+    if (!req.session.loggedIn || !req.session.uId) {
+      return responseSender.notAuthorized(next)
     }
+
+    let allowed
+    try {
+      allowed = await getAccess(req, mid, accessType)
+    } catch (ex) {
+      return responseSender.error(next, ex)
+    }
+
+    if (!allowed) {
+      return responseSender.forbidden(next)
+    }
+
+    next()
   }
+}
 
 /**
  * Middleware function that checks if user is authorized
@@ -73,6 +74,7 @@ const middleware = (mid, accessType) => {
  * @param {object} req - The input request object
  * @param {object} res - The output response object
  * @param {function} next - The callback function used in middleware
+ * @return {void}
  *
  */
 const checkAuth = (req, res, next) => {
@@ -85,5 +87,5 @@ const checkAuth = (req, res, next) => {
 
 module.exports = {
   checkAuth,
-  middleware
+  middleware,
 }

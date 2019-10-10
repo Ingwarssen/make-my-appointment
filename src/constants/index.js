@@ -4,7 +4,7 @@ const COMMON = require('./common')
 
 const EXTRA = {
   DB,
-  RESPONSES
+  RESPONSES,
 }
 
 // used to make common as root but extend by other constants

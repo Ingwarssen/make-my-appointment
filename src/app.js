@@ -11,14 +11,14 @@ const helmet = require('helmet')
 const config = require('./config')
 const startUpScript = require('./init')
 const mainRouter = require('./features')
-const configurePassportFb = require('./features/auth/strategies/configurePassportFb')
+const configurePassportFb = require('./features/auth/strategies/configurePassportFbToken')
 
 const {
   mongo,
   logger,
   isApiAvailable,
   sessionMiddleware,
-  cacheControlMiddleware
+  cacheControlMiddleware,
 } = require('./utils')
 
 let app
@@ -34,7 +34,7 @@ process.on('uncaughtException', error => {
 })
 
 module.exports = {
-  get app () {
+  get app() {
     if (!app) {
       throw new Error('Please run server first')
     }
@@ -42,7 +42,7 @@ module.exports = {
     return app
   },
 
-  async run () {
+  async run() {
     app = express()
 
     // connect to database
@@ -59,10 +59,10 @@ module.exports = {
     app.use(helmet())
 
     const corsOption = {
-      origin        : true,
-      methods       : 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials   : true,
-      exposedHeaders: ['x-auth-token']
+      origin: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true,
+      exposedHeaders: ['x-auth-token'],
     }
 
     app.use(cors(corsOption))
@@ -71,13 +71,17 @@ module.exports = {
     app.use(express.static(`${config.workingDirectory}dist`))
 
     // setup body parser
-    app.use(bodyParser.json({
-      strict: false,
-      limit : '10mb'
-    }))
-    app.use(bodyParser.urlencoded({
-      extended: false
-    }))
+    app.use(
+      bodyParser.json({
+        strict: false,
+        limit: '10mb',
+      })
+    )
+    app.use(
+      bodyParser.urlencoded({
+        extended: false,
+      })
+    )
 
     app.use(sessionMiddleware.connect())
     app.use(cacheControlMiddleware)
@@ -102,5 +106,5 @@ module.exports = {
     })
 
     return httpServer
-  }
+  },
 }

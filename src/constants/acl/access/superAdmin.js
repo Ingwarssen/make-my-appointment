@@ -1,54 +1,56 @@
 module.exports = [
   {
     moduleName: 'Admins',
-    module    : 1,
+    module: 1,
 
     cms: {
       create: true,
-      read  : true,
+      read: true,
       update: true,
-      delete: true
+      delete: true,
     },
 
     mobile: {
       create: true,
-      read  : true,
+      read: true,
       update: true,
-      delete: true
-    }
-  }, {
+      delete: true,
+    },
+  },
+  {
     moduleName: 'Users',
-    module    : 2,
+    module: 2,
 
     cms: {
       create: true,
-      read  : true,
+      read: true,
       update: true,
-      delete: true
+      delete: true,
     },
 
     mobile: {
       create: true,
-      read  : true,
+      read: true,
       update: true,
-      delete: true
-    }
-  }, {
+      delete: true,
+    },
+  },
+  {
     moduleName: 'Training schedule',
-    module    : 3,
+    module: 3,
 
     cms: {
       create: true,
-      read  : true,
+      read: true,
       update: true,
-      delete: true
+      delete: true,
     },
 
     mobile: {
       create: true,
-      read  : true,
+      read: true,
       update: true,
-      delete: true
-    }
-  }
+      delete: true,
+    },
+  },
 ]

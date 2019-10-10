@@ -1,17 +1,18 @@
 const passport = require('passport')
-const { Strategy } = require('passport-facebook')
+const FacebookTokenStrategy = require('passport-facebook-token')
 const UserModel = require('../../user/model')
 const config = require('../../../config')
 
-module.export = function() {
+module.exports = function() {
   passport.use(
-    new Strategy(
+    new FacebookTokenStrategy(
       {
         clientID: config.facebook.appId,
         clientSecret: config.facebook.appSecret,
-        callbackURL: '/return',
+        fbGraphVersion: config.facebook.apiVersion,
       },
-      async function(accessToken, refreshToken, profile, done) {
+
+      async (accessToken, refreshToken, profile, done) => {
         const query = { facebookId: profile.id }
 
         const modify = {

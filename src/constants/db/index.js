@@ -1,6 +1,6 @@
 module.exports = {
   USER: {
-    MODEL     : 'User',
-    COLLECTION: 'users'
-  }
+    MODEL: 'User',
+    COLLECTION: 'users',
+  },
 }

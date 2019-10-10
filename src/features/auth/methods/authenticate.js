@@ -1,13 +1,13 @@
 const expressJwt = require('express-jwt')
 
 module.exports = expressJwt({
-  secret         : 'my-secret',
+  secret: 'my-secret',
   requestProperty: 'auth',
-  getToken (req) {
+  getToken(req) {
     if (req.headers['x-auth-token']) {
       return req.headers['x-auth-token']
     }
 
     return null
-  }
+  },
 })

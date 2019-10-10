@@ -1,9 +1,7 @@
-const {
-  responseSender
-} = require('../../../utils')
+const { responseSender, logger } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
-  console.log('got callback')
+  logger.log('got callback', responseSender)
 
   next()
 }

@@ -1,16 +1,11 @@
-const {USER_STATUS} = require('../../../constants')
-const {LOC_STR} = require('../../../constants/responses')
+const { LOC_STR } = require('../../../constants/responses')
 const UserModel = require('../../user/model')
 const schema = require('../joi.schema').signUpFromMobile
 
-const {
-  responseSender,
-  joiValidate,
-  logger
-} = require('../../../utils')
+const { responseSender, joiValidate, logger } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
-  const {body: payload} = req
+  const { body: payload } = req
   let options
 
   try {
@@ -40,5 +35,5 @@ module.exports = async (req, res, next) => {
 
   logger.info(`User logged in from MOBILE-- uid: ${data._id} deviceId: ${payload.deviceId}`)
 
-  responseSender.success(res, {data})
+  responseSender.success(res, { data })
 }

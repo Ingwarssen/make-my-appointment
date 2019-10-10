@@ -1,7 +1,7 @@
-const cmsRouter = require('./cms');
-const mobileRouter = require('./mobile');
+const cmsRouter = require('./cms')
+const mobileRouter = require('./mobile')
 
 module.exports = {
-  cms   : cmsRouter,
-  mobile: mobileRouter
-};
+  cms: cmsRouter,
+  mobile: mobileRouter,
+}

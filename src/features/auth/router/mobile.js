@@ -4,16 +4,16 @@ const router = express.Router()
 
 router.get('/', require('../methods/isAuth'))
 
-router.post('/facebook',
+router.post(
+  '/facebook',
   require('../methods/passportAuth'),
   require('../methods/authCheck'),
   require('../methods/generateToken'),
-  require('../methods/sendToken'))
+  require('../methods/sendToken')
+)
 
 router.get('/facebook/callback')
-router.get('/me',
-  require('../methods/authenticate'),
-  require('../../user/methods/getCurrentUser'))
+router.get('/me', require('../methods/authenticate'), require('../../user/methods/getCurrentUser'))
 
 router.get('/settings', require('../methods/settings'))
 

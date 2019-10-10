@@ -1,49 +1,44 @@
-const Promise = require('bluebird');
-const accessRoleData = require('../constants/acl/access');
-const ROLES = require('../constants/acl/role');
-const AccessRoleModel = require('../features/accessRole/model');
+const Promise = require('bluebird')
+const accessRoleData = require('../constants/acl/access')
+const ROLES = require('../constants/acl/role')
+const AccessRoleModel = require('../features/accessRole/model')
 
 const iterator = roleName => {
-  const {
-    _id,
-    name,
-    level,
-    allowedLoginFromMobile
-  } = ROLES[roleName];
+  const { _id, name, level, allowedLoginFromMobile } = ROLES[roleName]
   const query = {
-    _id
-  };
+    _id,
+  }
 
   const modify = {
     $set: {
       roleAccess: accessRoleData[_id],
-      allowedLoginFromMobile
+      allowedLoginFromMobile,
     },
 
     $setOnInsert: {
       level,
-      name
-    }
-  };
+      name,
+    },
+  }
 
   const opt = {
-    new                : true,
-    upsert             : true,
-    setDefaultsOnInsert: true
-  };
+    new: true,
+    upsert: true,
+    setDefaultsOnInsert: true,
+  }
 
-  return AccessRoleModel.updateOne(query, modify, opt);
-};
+  return AccessRoleModel.updateOne(query, modify, opt)
+}
 
 const addRoles = () => {
-  const roleNames = Object.keys(ROLES);
-  const tasks = [];
+  const roleNames = Object.keys(ROLES)
+  const tasks = []
 
   roleNames.forEach(elem => {
-    tasks.push(iterator(elem));
-  });
+    tasks.push(iterator(elem))
+  })
 
-  return Promise.all(tasks);
-};
+  return Promise.all(tasks)
+}
 
-module.exports = addRoles;
+module.exports = addRoles

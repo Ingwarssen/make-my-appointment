@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-  req.isMobile = true;
+  req.isMobile = true
 
-  next();
-};
+  next()
+}

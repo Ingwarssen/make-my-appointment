@@ -7,8 +7,8 @@ const visitor = require('./visitor')
 
 module.exports = {
   [ROLE.SUPER_ADMIN._id]: superAdmin,
-  [ROLE.ADMIN._id]      : admin,
-  [ROLE.TRAINER._id]    : trainer,
-  [ROLE.CLIENT._id]     : client,
-  [ROLE.VISITOR._id]    : visitor
+  [ROLE.ADMIN._id]: admin,
+  [ROLE.TRAINER._id]: trainer,
+  [ROLE.CLIENT._id]: client,
+  [ROLE.VISITOR._id]: visitor,
 }

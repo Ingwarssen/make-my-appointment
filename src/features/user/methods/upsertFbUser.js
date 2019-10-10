@@ -1,18 +1,10 @@
-const pwdGenerator = require('generate-password')
-const {update: schema} = require('../joi.schema')
+const { update: schema } = require('../joi.schema')
 const UserModel = require('../model')
-const checkRoles = require('../utils')
-const {USER_STATUS} = require('../../../constants')
-const {LOC_STR} = require('../../../constants/responses')
-const {spaHost} = require('../../../config')
-const {
-  responseSender,
-  joiValidate,
-  logger
-} = require('../../../utils')
+const { USER_STATUS } = require('../../../constants')
+const { responseSender, joiValidate } = require('../../../utils')
 
 module.exports = async (req, res, next) => {
-  const {body: payload} = req
+  const { body: payload } = req
   const userId = req.params.userId
 
   let options
@@ -24,7 +16,7 @@ module.exports = async (req, res, next) => {
 
   let user
   try {
-    user = await UserModel.updateOne({_id: userId})
+    user = await UserModel.updateOne({ _id: userId })
   } catch (ex) {
     return responseSender.error(next, ex, 'Database Error: UserModel.getOne')
   }
@@ -40,5 +32,5 @@ module.exports = async (req, res, next) => {
     return responseSender.error(next, ex, 'Database Error: UserModel.getPopulatedById')
   }
 
-  responseSender.success(res, {data})
+  responseSender.success(res, { data })
 }

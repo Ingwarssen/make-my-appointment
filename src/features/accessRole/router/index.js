@@ -1,5 +1,5 @@
-const cmsRouter = require('./cms');
+const cmsRouter = require('./cms')
 
 module.exports = {
-  cms: cmsRouter
-};
+  cms: cmsRouter,
+}

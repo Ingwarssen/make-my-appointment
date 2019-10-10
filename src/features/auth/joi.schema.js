@@ -7,7 +7,7 @@ const customJoi = Joi.extend({
   name: 'hash',
 
   language: {
-    encrypt: 'can\'t encrypt empty value'
+    encrypt: "can't encrypt empty value",
   },
 
   rules: [
@@ -15,33 +15,46 @@ const customJoi = Joi.extend({
       name: 'encrypt',
 
       // eslint-disable-next-line
-      validate (params, value, state, options) {
+      validate(params, value, state, options) {
         return encryptPassword(value)
-      }
-    }
-  ]
+      },
+    },
+  ],
 })
 
 const logInFromCms = Joi.object().keys({
-  email   : Joi.string().email().required(),
-  password: customJoi.hash().encrypt().required()
+  email: Joi.string()
+    .email()
+    .required(),
+  password: customJoi
+    .hash()
+    .encrypt()
+    .required(),
 })
 
 const signUpFromMobile = Joi.object().keys({
-  name           : Joi.string().required(),
-  phone          : JoiPhone.string().phoneNumber().required(),
-  password       : customJoi.hash().encrypt().required(),
-  confirmPassword: customJoi.hash().encrypt().required(),
-  birthday       : Joi.date()
+  name: Joi.string().required(),
+  phone: JoiPhone.string()
+    .phoneNumber()
+    .required(),
+  password: customJoi
+    .hash()
+    .encrypt()
+    .required(),
+  confirmPassword: customJoi
+    .hash()
+    .encrypt()
+    .required(),
+  birthday: Joi.date(),
 })
 
 const logInFromMobile = logInFromCms.keys({
-  deviceId   : Joi.string().required(),
-  deviceToken: Joi.string().required()
+  deviceId: Joi.string().required(),
+  deviceToken: Joi.string().required(),
 })
 
 module.exports = {
   logInFromCms,
   signUpFromMobile,
-  logInFromMobile
+  logInFromMobile,
 }
