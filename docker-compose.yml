@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+  mongo:
+    container_name: make-my-appoitment-backend-mongo
+    image: mongo
+    volumes:
+      - mongodbdata:/data/db
+    ports:
+      - '27018:27017'
+volumes:
+  mongodbdata:
