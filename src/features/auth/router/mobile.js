@@ -12,7 +12,6 @@ router.post(
   require('../methods/sendToken')
 )
 
-router.get('/facebook/callback')
 router.get('/me', require('../methods/authenticate'), require('../../user/methods/getCurrentUser'))
 
 router.get('/settings', require('../methods/settings'))

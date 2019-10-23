@@ -3,13 +3,13 @@ const { Strategy } = require('passport-facebook')
 const UserModel = require('../../user/model')
 const config = require('../../../config')
 
-module.export = function() {
+module.exports = function() {
   passport.use(
     new Strategy(
       {
         clientID: config.facebook.appId,
         clientSecret: config.facebook.appSecret,
-        callbackURL: '/return',
+        callbackURL: '/api/v1/mobile/auth/facebook/callback',
       },
       async function(accessToken, refreshToken, profile, done) {
         const query = { facebookId: profile.id }

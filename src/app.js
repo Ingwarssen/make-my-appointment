@@ -1,17 +1,22 @@
-const http = require('http')
+const https = require('https')
+const morgan = require('morgan')
 const express = require('express')
 const bodyParser = require('body-parser')
-const morgan = require('morgan')
 const consolidate = require('consolidate')
 
-const cookieParser = require('cookie-parser')
+const fs = require('fs')
 const cors = require('cors')
 const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
 
 const config = require('./config')
 const startUpScript = require('./init')
 const mainRouter = require('./features')
 const configurePassportFb = require('./features/auth/strategies/configurePassportFbToken')
+
+const key = fs.readFileSync(__dirname + '/certs/selfsigned.key')
+const cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt')
+const httpsOptions = { key, cert }
 
 const {
   mongo,
@@ -49,7 +54,7 @@ module.exports = {
     await mongo.connect()
 
     // configure passport
-    configurePassportFb()
+    await configurePassportFb()
 
     // set up views
     app.engine('hbs', consolidate.handlebars)
@@ -95,16 +100,16 @@ module.exports = {
     // attach main router
     mainRouter(app)
 
-    const httpServer = http.createServer(app)
+    const httpsServer = https.createServer(httpsOptions, app)
 
     await startUpScript()
 
-    httpServer.listen(config.port, () => {
+    httpsServer.listen(config.port, () => {
       logger.info(' --------------------------------------------------------------------')
       logger.info(`  Server started at port ${config.port} in ${config.env} environment`)
       logger.info(' --------------------------------------------------------------------')
     })
 
-    return httpServer
+    return httpsServer
   },
 }
